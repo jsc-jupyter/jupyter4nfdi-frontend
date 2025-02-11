@@ -1,2 +1,3 @@
-# jupyter4nfdi-frontend
-Frontend implementation used for the Jupyter4NFDI project
+# Jupyter4NFDI Frontend
+
+This repository provides a set of overrides for the [JupyterHub Enhanced Frontend](https://github.com/jsc-jupyter/base-frontend) to optimize it for the [Jupyter4NFDI JupyterHub](https://hub.nfdi-jupyter.de). 
