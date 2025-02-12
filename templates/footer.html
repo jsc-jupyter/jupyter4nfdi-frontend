@@ -13,63 +13,6 @@
   {%- do systems_default_order.append([system, status_id]) -%}
 {%- endfor -%}
 
-{%- macro random_int(len) -%}
-  {%- for _ in range(len) -%}
-      {{ range(10) | random }}
-  {%- endfor -%}
-{%- endmacro -%}
-
-{%- macro number_of_users(system) -%}
-  {%- if system == "jupyter" -%}
-    {%- set system_svg = svg.users_svg -%}
-    {%- set url_suffix = "" -%}
-  {%- elif system == "jsccloud"%}
-    {%- set system_svg = svg.servers_svg -%}
-    {%- set url_suffix = "var-system=JSC-Cloud" -%}
-  {%- else -%}
-    {%- set system_svg = svg.servers_svg -%}
-    {%- set url_suffix = "var-system=" + system.upper() -%}
-  {%- endif -%}
-<a class="system-users d-inline-block text-muted ms-1" 
-  data-bs-toggle="tooltip" data-bs-placement="top" title="Number of active {%- if system == 'jupyter' %} users in the last 24 hours {%- else %} servers {%- endif -%}"
-  href="https://{{hostname}}/grafana/?{{url_suffix}}" target="_blank">
-  <span id="{{system}}-users">0</span>
-  <span> {{ system_svg | safe }} </span>
-  <div class="system-users-link-div d-inline-block">
-    <span class="system-users-link" id="{{system}}-users-link">
-      {{ svg.link_svg | safe }}
-    </span>
-  </div>
-</a>
-{%- endmacro -%}
-
-{%- macro ampel(system, system_id) -%}
-{%- set system_lower = system.lower() %}
-<div id="ampel-{{system_lower}}" class="text-center">
-  <img class="ampel-img" src='{{static_url( "images/footer/systems/" + system_lower + ".svg?v=" + random_int(10) )}}' />
-  <a id="ampel-{{system_lower}}-tooltip" href="https://status.jsc.fz-juelich.de/services/{{system_id}}" target="_blank" class="align-middle" data-bs-toggle="tooltip" data-bs-placement="top">
-    {%- if system == "JUPYTER" -%}
-    {{ jupyter_name }}
-    {%- elif system == "JSCCLOUD" -%}
-    JSC-Cloud
-    {%- else -%}
-    {{ system }}
-    {%- endif -%}
-  </a>
-  {{ number_of_users(system_lower) }}
-</div>
-{%- endmacro -%}
-
-{%- macro create_carousel_systems(start_index, length) -%}
-{%- set end_index = start_index + length -%}
-{%- for system_config in systems_default_order %}
-  {%- if loop.index0 >= start_index and loop.index0 < end_index %}
-{{ ampel(system_config[0], system_config[1]) }}
-  {%- endif -%}
-{%- endfor -%}
-{%- endmacro -%}
-
-
 {%- block footer -%}
 <footer class="navbar mt-auto p-0">
   <div id="footer-top" class="container-fluid justify-content-evenly p-4">
@@ -118,8 +61,6 @@ require(["jquery"], function (
   $
 ) {
   "use strict";
-
-
 
   const carouselInner = $('#carousel-inner');
 
@@ -297,17 +238,6 @@ require(["jquery"], function (
     }
   }
 
-  function updateSystemHoverTooltips() {
-    const incidents = {{ incidents | tojson }};
-    for (const [system, systemInfo] of Object.entries(incidents)) {
-      if (systemInfo.incident) {
-        $(`#ampel-${system.toLowerCase()}-tooltip`)
-          .attr('data-bs-original-title', systemInfo.incident);
-      }
-    }
-    reorderSystems(incidents);
-  }
-
   // Update the carousel when the window is resized
   $(window).resize(function () {
     createCarouselPages();
@@ -383,6 +313,7 @@ require(["jquery"], function (
           .parents("[data-toggle]")
           .attr("data-bs-original-title", `Number of active servers`);
         $(`#${system.toLowerCase()}-users`)
+          .parents("[data-toggle]").tooltip();
       }
     }
   });
