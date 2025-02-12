@@ -130,6 +130,13 @@ require(["jquery"], function (
     return anchorElement;
   }
 
+  function checkImageExists(imageSrc, system, callback) {
+    const img = new Image();
+    img.src = imageSrc;
+    img.onload = () => callback(true);
+    img.onerror = () => callback(false);
+  }
+
   function ampel(system, systemId) {
     const systemLower = system.toLowerCase();
     const imgVersion = randomInt(10);
@@ -146,19 +153,49 @@ require(["jquery"], function (
         displayName = system;
     }
 
-    const ampelHtml = `
-      <div id="ampel-${systemLower}" class="text-center">
-          <img class="ampel-img" src="${staticUrl}/images/footer/systems/${systemLower}.svg?v=${imgVersion}" />
-          <a id="ampel-${systemLower}-tooltip" 
-              href="https://status.jsc.fz-juelich.de/services/${systemId}" 
-              target="_blank" 
-              class="align-middle" 
-              data-bs-toggle="tooltip" 
-              data-bs-placement="top">
-              ${displayName}
-          </a>
-          ${numberOfUsers(systemLower)}
-      </div>`;
+    let ampelHtml = "";
+    if ( ["JUPYTER", "JUWELS", "JURECA", "JEDI", "JUSUF", "DEEP", "JSCCLOUD"].includes(system) ) {
+      let imgSrc = `${staticUrl}/images/footer/systems/${systemLower}.svg?v=${imgVersion}`;
+      checkImageExists(imgSrc, systemLower, function(exists) {
+        if (!exists) {
+          let newImgSrc = `${staticUrl}/images/footer/templates/0.svg?v=${imgVersion}`;
+          $(`#ampel-${systemLower} .ampel-img`).attr("src", newImgSrc);          
+        }
+      });
+      
+      ampelHtml = `
+        <div id="ampel-${systemLower}" class="text-center"
+            data-system=${system}
+            data-systemlower=${systemLower}
+            >
+            <img class="ampel-img" src="${imgSrc}" />
+            <a id="ampel-${systemLower}-tooltip" 
+                href="https://status.jsc.fz-juelich.de/services/${systemId}" 
+                target="_blank" 
+                class="align-middle" 
+                data-bs-toggle="tooltip"
+                data-bs-placement="top">
+                ${displayName}
+            </a>
+            ${numberOfUsers(systemLower)}
+        </div>`;
+    } else {
+      ampelHtml = `
+        <div id="ampel-${systemLower}" class="text-center"
+            data-system=${system}
+            data-systemlower=${systemLower}
+            >
+            <img class="ampel-img" src="${staticUrl}/images/footer/templates/0.svg?v=${imgVersion}" />
+            <a id="ampel-${systemLower}-tooltip"
+                target="_blank" 
+                class="align-middle" 
+                data-bs-toggle="tooltip"
+                data-bs-placement="top">
+                ${displayName}
+            </a>
+            ${numberOfUsers(systemLower)}
+        </div>`;
+    }
 
     return ampelHtml;
   }
@@ -320,3 +357,4 @@ require(["jquery"], function (
 })
 </script>
 {%- endblock -%}
+
