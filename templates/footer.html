@@ -17,7 +17,7 @@
 <footer class="navbar mt-auto p-0">
   <div id="footer-top" class="container-fluid justify-content-evenly p-4">
     {#- We create a carousel to be able to show all systems in the footer #}
-    <div id="footerSystemsCarousel" class="carousel carousel-dark slide w-100" data-bs-ride="carousel" data-bs-interval="10000">
+    <div id="footerSystemsCarousel" data-sse-usercount class="carousel carousel-dark slide w-100" data-bs-ride="carousel" data-bs-interval="10000">
       <div  id="carousel-inner" class="carousel-inner">
         <!-- Carousel items will be injected here dynamically via JavaScript -->
       </div>
@@ -31,7 +31,7 @@
       </button>
     </div>
   </div>
-  <div id="footer-bottom" class="container-fluid justify-content-center">
+  <div id="footer-bottom" class="container-fluid justify-content-center" data-sse-incidents>
     {%- set logo_width = "220px" -%}
     {%- set div_classes = "px-2 text-center" %}
     <a class="py-2 {{div_classes}}" target="_blank" href="https://www.fz-juelich.de">&copy; Forschungszentrum Jülich</a>
