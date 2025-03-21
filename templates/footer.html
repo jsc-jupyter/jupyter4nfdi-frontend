@@ -100,15 +100,15 @@ require(["jquery"], function (
 
     if (system === "jupyter") {
         systemSvg = usersSvg;
-        urlSuffix = "";
+        urlSuffix = "var-hub=nfdigeneral&";
         tooltipTitle = "Number of active users in the last 24 hours";
     } else if (system === "jsccloud") {
         systemSvg = serversSvg;
-        urlSuffix = "var-system=JSC-Cloud";
+        urlSuffix = "var-hub=nfdigeneral&var-system=JSC-Cloud";
         tooltipTitle = "Number of active servers";
     } else {
         systemSvg = linkSvg;
-        urlSuffix = `var-system=${system.toUpperCase()}`;
+        urlSuffix = `var-hub=nfdigeneral&var-system=${system.toUpperCase()}`;
         tooltipTitle = "Number of active servers";
     }
 
