@@ -91,7 +91,9 @@
                   "options": {
                     "collect": true,
                     "show": true
-                  }
+                  },
+                  "rtc_system_list": ["JSC-Cloud", "deNBI-Cloud"],
+                  "rtc_option_list": ["custom", "repo2docker", "default"]
                 },
                 "label": {
                   "type": "text",
@@ -100,7 +102,8 @@
                 "trigger": {
                   "init": "homeTriggerSystem",
                   "option": "homeTriggerSystem"
-                }
+                },
+                "triggerOnChange": "homeTriggerSystemChanged"
               },
               "repo2dockerdirectlink": {
                 "input": {
@@ -780,6 +783,7 @@
                   "options": {
                     "buttons": [
                       "share",
+                      "rtc",
                       "save",
                       "reset",
                       "delete",
@@ -789,6 +793,11 @@
                       "text": "Share",
                       "trigger": "homeTriggerButtonShare",
                       "show": true
+                    },
+                    "rtc": {
+                      "text": "RTC",
+                      "trigger": "homeTriggerButtonRTC",
+                      "show": false
                     },
                     "startgreen": {
                       "text": "Start",
