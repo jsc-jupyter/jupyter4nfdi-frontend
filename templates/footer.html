@@ -100,15 +100,15 @@ require(["jquery"], function (
 
     if (system === "jupyter") {
         systemSvg = usersSvg;
-        urlSuffix = "";
+        urlSuffix = "var-hub=nfdigeneral&";
         tooltipTitle = "Number of active users in the last 24 hours";
     } else if (system === "jsccloud") {
         systemSvg = serversSvg;
-        urlSuffix = "var-system=JSC-Cloud";
+        urlSuffix = "var-hub=nfdigeneral&var-system=JSC-Cloud";
         tooltipTitle = "Number of active servers";
     } else {
         systemSvg = linkSvg;
-        urlSuffix = `var-system=${system.toUpperCase()}`;
+        urlSuffix = `var-hub=nfdigeneral&var-system=${system.toUpperCase()}`;
         tooltipTitle = "Number of active servers";
     }
 
@@ -116,7 +116,7 @@ require(["jquery"], function (
         <a class="system-users d-inline-block text-muted ms-1" 
            data-bs-toggle="tooltip" data-bs-placement="top" 
            title="${tooltipTitle}" 
-           href="https://{{frontendCollection.get('hostname')}}/grafana/?${urlSuffix}" 
+           href="https://jupyter.jsc.fz-juelich.de/grafana/?${urlSuffix}" 
            target="_blank">
            <span id="${system}-users">0</span>
            <span>${systemSvg}</span>
@@ -338,6 +338,10 @@ require(["jquery"], function (
         case 'JSC-Cloud':
           $(`#jsccloud-users`).html(usercount['total']);
           systems['jsccloud'] = true;
+          break;
+        case 'deNBI-Cloud':
+          $(`#denbicloud-users`).html(usercount['total']);
+          systems['denbicloud'] = true;
           break;
         default:
           $(`#${system.toLowerCase()}-users`).html(usercount['total']);
