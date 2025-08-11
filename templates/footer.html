@@ -178,6 +178,22 @@ require(["jquery"], function (
             </a>
             ${numberOfUsers(systemLower)}
         </div>`;
+    } else if ( ["DENBICLOUD"].includes(system) {
+      ampelHtml = `
+        <div id="ampel-${systemLower}" class="text-center"
+            data-system=${system}
+            data-systemlower=${systemLower}
+            >
+            <img class="ampel-img" src="${staticUrl}/images/footer/templates/50.svg?v=${imgVersion}" />
+            <a id="ampel-${systemLower}-tooltip"
+                target="_blank" 
+                class="align-middle" 
+                data-bs-toggle="tooltip"
+                data-bs-placement="top">
+                ${displayName}
+            </a>
+            ${numberOfUsers(systemLower)}
+        </div>`;
     } else {
       ampelHtml = `
         <div id="ampel-${systemLower}" class="text-center"
