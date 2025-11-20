@@ -1,6 +1,9 @@
 {%- macro create_user_widget() -%}
 {%- if user %}
-<div class="dropdown">
+<ul class="nav">
+  <div class="d-flex">
+    <li data-sse-credits class="nav-item me-3 align-self-center"></li>
+    <li class="nav-item dropdown">
   {%- set ns = namespace(display_name=user.name) %}
   {%- if auth_state %}
     {%- set ns.display_name = auth_state.get("oauth_user", auth_state).get("name", user.name) %}
@@ -24,7 +27,9 @@
       </button>
     </li>
   </ul>
-</div>
+    </li>
+  </div>
+</ul>
 {%- else %}
 <div class="empty mb-3"></div>
 {%- endif -%}
