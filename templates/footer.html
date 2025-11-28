@@ -184,13 +184,13 @@ require(["jquery"], function (
             data-system=${system}
             data-systemlower=${systemLower}
             >
-            <img class="ampel-img" src="${staticUrl}/images/footer/templates/50.svg?v=${imgVersion}" />
+            <img class="ampel-img" src="${staticUrl}/images/footer/templates/0.svg?v=${imgVersion}" />
             <a id="ampel-${systemLower}-tooltip"
                 target="_blank" 
                 class="align-middle" 
                 data-bs-toggle="tooltip"
                 data-bs-html="true"
-		data-bs-original-title="Due to an air conditioning failure in a de.NBI Cloud server room<br>most servers and the network went offline around 8:30 PM on 2025-11-27.<br>We don't yet know when cooling or services will be restored.<br>Updates will follow."
+		{# data-bs-original-title="Due to an air conditioning failure in a de.NBI Cloud server room<br>most servers and the network went offline around 8:30 PM on 2025-11-27.<br>We don't yet know when cooling or services will be restored.<br>Updates will follow." #}
                 data-bs-placement="top">
                 ${displayName}
             </a>
@@ -318,7 +318,7 @@ require(["jquery"], function (
         }
       }
     }
-    newMaintenanceList.push("deNBI-Cloud");
+    // newMaintenanceList.push("deNBI-Cloud");
     globalMaintenanceSystems = newMaintenanceList;
     $(`[id$='-option-input']`).trigger("option");
     $(`[id^='ampel-'][id$='-tooltip']`).tooltip();
