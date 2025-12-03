@@ -1,6 +1,9 @@
 {%- macro create_user_widget() -%}
 {%- if user %}
-<div class="dropdown">
+<ul class="nav">
+  <div class="d-flex">
+    <li data-sse-credits class="nav-item me-3 align-self-center"></li>
+    <li class="nav-item dropdown">
   {%- set ns = namespace(display_name=user.name) %}
   {%- if auth_state %}
     {%- set ns.display_name = auth_state.get("oauth_user", auth_state).get("name", user.name) %}
@@ -24,7 +27,9 @@
       </button>
     </li>
   </ul>
-</div>
+    </li>
+  </div>
+</ul>
 {%- else %}
 <div class="empty mb-3"></div>
 {%- endif -%}
@@ -49,6 +54,9 @@
     {#- <li class="nav-item"><a id="{{prefix}}status-nav-item" class="nav-link text-decoration-none" target="_blank" href="https://status.jsc.fz-juelich.de/">JSC Status</a></li> -#}
     {%- endif %}
     <li class="nav-item"><a id="{{prefix}}docs-nav-item" class="nav-link text-decoration-none" target="_blank" href="https://nfdi-jupyter.de">Documentation</a></li>
+    {%- if user %}
+    <li class="nav-item"><a id="{{prefix}}start-nav-item" class="nav-link text-decoration-none" href="{{ base_url }}credits">Credits</a></li>
+    {%- endif %}
   </div>
 </ul>
 {%- endmacro -%}
