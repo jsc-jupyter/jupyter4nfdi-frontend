@@ -19,6 +19,10 @@
               ]
             }
           },
+          "envvariables": {
+            "show": true,
+            "displayName": "Environment variables"
+          },
           "modules": {
             "displayName": "Kernels and Extensions",
             "dependency": {
@@ -586,6 +590,20 @@
               }
             }
           },
+          "envvariables": {
+            "center": {
+              "envvariables1": {
+                "input": {
+                  "type": "envvariablesentry",
+                  "options": {
+                    "show": true,
+                    "collect": true,
+                    "group": "envvariables"
+                  } 
+                }
+              } 
+            }
+          },
           "modules": {
             "center": {
               "extensions": {
@@ -645,6 +663,29 @@
                 "label": {
                   "type": "header",
                   "value": "Proxies"
+                },
+                "triggerSuffix": "checkboxes-div",
+                "trigger": {
+                  "option": "homeTriggerModules",
+                  "system": "homeTriggerModules"
+                },
+                "dependency": {
+                  "option": [
+                    "lmod"
+                  ]
+                }
+              },
+              "communities": {
+                "input": {
+                  "type": "multiple_checkboxes"
+                },
+                "options": {
+                  "group": "modules",
+                  "setName": "communitySet"
+                },  
+                "label": {
+                  "type": "header",
+                  "value": "Communities"
                 },
                 "triggerSuffix": "checkboxes-div",
                 "trigger": {
