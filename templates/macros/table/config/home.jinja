@@ -84,11 +84,6 @@
                   "init": "homeTriggerOption"
                 }
               },
-              "hr1": {
-                "input": {
-                  "type": "hr"
-                }
-              },
               "system": {
                 "input": {
                   "type": "select",
@@ -110,6 +105,11 @@
                   "option": "homeTriggerSystem"
                 },
                 "triggerOnChange": "homeTriggerSystemChanged"
+              },
+              "hr1": {
+                "input": {
+                  "type": "hr"
+                }
               },
               "repo2dockerdirectlink": {
                 "input": {
@@ -205,6 +205,7 @@
                   "options": {
                     "group": "repo2docker",
                     "enabled": true,
+                    "value": "HEAD",
                     "placeholder": "HEAD",
                     "patternDisabled": "^([a-zA-Z0-9._-]+|([a-f0-9]{7,40})|([a-zA-Z0-9._-]+\\/[a-zA-Z0-9._-]+)|([a-zA-Z0-9._-]+@~\\d+)|@~\\d+)$"
                   }
@@ -428,6 +429,7 @@
                   "value": "Project"
                 },
                 "trigger": {
+                  "system": "homeTriggerProject",
                   "account": "homeTriggerProject"
                 },
                 "dependency": {
@@ -449,6 +451,7 @@
                   "value": "Partition"
                 },
                 "trigger": {
+                  "account": "homeTriggerPartition",
                   "project": "homeTriggerPartition",
                   "system": "homeTriggerPartition"
                 },
@@ -470,6 +473,7 @@
                   "value": "Reservation"
                 },
                 "trigger": {
+                  "account": "homeTriggerReservation",
                   "partition": "homeTriggerReservation",
                   "project": "homeTriggerReservation",
                   "system": "homeTriggerReservation"
@@ -599,9 +603,9 @@
                     "show": true,
                     "collect": true,
                     "group": "envvariables"
-                  } 
+                  }
                 }
-              } 
+              }
             }
           },
           "modules": {
@@ -858,6 +862,7 @@
                     "buttons": [
                       "share",
                       "rtc",
+                      "getlink",
                       "save",
                       "reset",
                       "delete",
@@ -872,6 +877,12 @@
                       "text": "RTC",
                       "trigger": "homeTriggerButtonRTC",
                       "show": false
+                    },
+                    "getlink": {
+                      "text": "URL",
+                      "trigger": "homeTriggerButtonGetLink",
+                      "defaultRow": true,
+                      "firstRow": false
                     },
                     "startgreen": {
                       "text": "Start",
