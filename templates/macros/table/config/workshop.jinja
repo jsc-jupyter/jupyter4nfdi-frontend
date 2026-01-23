@@ -9,16 +9,6 @@
             "show": true,
             "displayName": "Lab Config"
           },
-          "storage": {
-            "show": true,
-            "displayName": "Storage",
-            "dependency": {
-              "system": [
-                "jsccloud",
-                "denbi"
-              ]
-            }
-          },
           "envvariables": {
             "show": true,
             "displayName": "Environment variables"
@@ -35,7 +25,7 @@
             "show": false,
             "displayName": "Resources",
             "trigger": {
-              "partition": "homeTriggerNavbarResources"
+              "partition": "wTriggerNavbarResources"
             },
             "dependency": {
               "system": [
@@ -45,7 +35,6 @@
           },
           "logs": {
             "show": true,
-            "firstRow": false,
             "displayName": "Logs"
           }
         },
@@ -67,6 +56,9 @@
                   "width": 4,
                   "value": "Name"
                 },
+                "trigger": {
+                  "init": "wTriggerName"
+                }
               },
               "option": {
                 "input": {
@@ -81,7 +73,7 @@
                   "value": "Select Version"
                 },
                 "trigger": {
-                  "init": "homeTriggerOption"
+                  "init": "wTriggerOption"
                 }
               },
               "system": {
@@ -91,20 +83,16 @@
                     "collect": true,
                     "show": true,
                     "credits": true
-                  },
-                  "share_system_list": ["JSC-Cloud", "deNBI-Cloud"],
-                  "rtc_system_list": ["JSC-Cloud", "deNBI-Cloud"],
-                  "rtc_option_list": ["custom", "repo2docker", "default"]
+                  }
                 },
                 "label": {
                   "type": "text",
                   "value": "Systems"
                 },
                 "trigger": {
-                  "init": "homeTriggerSystem",
-                  "option": "homeTriggerSystem"
-                },
-                "triggerOnChange": "homeTriggerSystemChanged"
+                  "init": "wTriggerSystem",
+                  "option": "wTriggerSystem"
+                }
               },
               "hr1": {
                 "input": {
@@ -179,8 +167,8 @@
                   "type": "text",
                   "options": {
                     "group": "repo2docker",
-                    "enabled": "show",
                     "required": true,
+                    "enabled": "show",
                     "placeholder": "example: yuvipanda/requirements or https://github.com/yuvipanda/requirements",
                     "pattern": "^(https?:\\/\\/github\\.com\\/)?([^\\/]+\\/[^\\/]+)\\/?$"
                   }
@@ -191,7 +179,7 @@
                 },
                 "onInputChange": "repoUrlChanged",
                 "trigger": {
-                  "repotype": "homeTriggerUpdateRepoUrlForType"
+                  "repotype": "wTriggerUpdateRepoUrlForType"
                 },
                 "dependency": {
                   "option": [
@@ -205,9 +193,7 @@
                   "options": {
                     "group": "repo2docker",
                     "enabled": true,
-                    "value": "HEAD",
-                    "placeholder": "HEAD",
-                    "patternDisabled": "^([a-zA-Z0-9._-]+|([a-f0-9]{7,40})|([a-zA-Z0-9._-]+\\/[a-zA-Z0-9._-]+)|([a-zA-Z0-9._-]+@~\\d+)|@~\\d+)$"
+                    "placeholder": "HEAD"
                   }
                 },
                 "label": {
@@ -232,7 +218,8 @@
                   "options": {
                     "group": "repo2docker",
                     "enabled": false,
-                    "placeholder": "Path to a notebook file (optional)"
+                    "placeholder": "Path to a notebook file (optional)",
+                    "patternDisabled": "^(\\/?[a-zA-Z0-9/_-]+(?:\\.[a-zA-Z0-9]+)?(?:\\/[a-zA-Z0-9/_-]+(?:\\.[a-zA-Z0-9]+)?)*|[a-zA-Z0-9/_-]+)$"
                   }
                 },
                 "label": {
@@ -347,8 +334,8 @@
                 "input": {
                   "type": "text",
                   "options": {
-                    "group": "custom",
                     "secret": true,
+                    "group": "custom",
                     "show": false,
                     "placeholder": "Enter your password"
                   }
@@ -385,13 +372,12 @@
                   "type": "textcheckbox",
                   "value": "Mount user data",
                   "options": {
-                    "default": false
+                    "default": true
                   }
                 },
                 "dependency": {
                   "option": [
-                    "custom",
-                    "repo2docker"
+                    "custom"
                   ]
                 }
               },
@@ -399,8 +385,8 @@
                 "input": {
                   "type": "select",
                   "options": {
-                    "enabled": true,
-                    "group": "hpc"
+                    "group": "hpc",
+                    "enabled": true
                   }
                 },
                 "label": {
@@ -408,7 +394,7 @@
                   "value": "Account"
                 },
                 "trigger": {
-                  "system": "homeTriggerAccount"
+                  "system": "wTriggerAccount"
                 },
                 "dependency": {
                   "system": [
@@ -420,8 +406,8 @@
                 "input": {
                   "type": "select",
                   "options": {
-                    "enabled": true,
-                    "group": "hpc"
+                    "group": "hpc",
+                    "enabled": true
                   }
                 },
                 "label": {
@@ -429,8 +415,7 @@
                   "value": "Project"
                 },
                 "trigger": {
-                  "system": "homeTriggerProject",
-                  "account": "homeTriggerProject"
+                  "account": "wTriggerProject"
                 },
                 "dependency": {
                   "system": [
@@ -442,8 +427,8 @@
                 "input": {
                   "type": "select",
                   "options": {
-                    "enabled": true,
-                    "group": "hpc"
+                    "group": "hpc",
+                    "enabled": true
                   }
                 },
                 "label": {
@@ -451,9 +436,8 @@
                   "value": "Partition"
                 },
                 "trigger": {
-                  "account": "homeTriggerPartition",
-                  "project": "homeTriggerPartition",
-                  "system": "homeTriggerPartition"
+                  "project": "wTriggerPartition",
+                  "system": "wTriggerPartition"
                 },
                 "dependency": {
                   "system": [
@@ -473,15 +457,14 @@
                   "value": "Reservation"
                 },
                 "trigger": {
-                  "account": "homeTriggerReservation",
-                  "partition": "homeTriggerReservation",
-                  "project": "homeTriggerReservation",
-                  "system": "homeTriggerReservation"
+                  "partition": "wTriggerReservation",
+                  "project": "wTriggerReservation",
+                  "system": "wTriggerReservation"
                 },
                 "observeAttribute": {
-                  "collect": "homeTriggerReservationObserveCollect"
+                  "collect": "wTriggerReservationObserveCollect"
                 },
-                "triggerOnChange": "homeTriggerReservation",
+                "triggerOnChange": "wTriggerReservation",
                 "dependency": {
                   "system": [
                     "unicore"
@@ -497,7 +480,7 @@
                 },
                 "triggerSuffix": "input-div",
                 "trigger": {
-                  "reservation": "homeTriggerReservationInfo"
+                  "reservation": "wTriggerReservationInfo"
                 },
                 "dependency": {
                   "system": [
@@ -517,16 +500,19 @@
                   "value": "Flavor"
                 },
                 "trigger": {
-                  "system": "homeTriggerFlavor"
+                  "system": "wTriggerFlavor"
                 },
                 "dependency": {
                   "system": [
                     "jsccloud",
+                    "lrz",
+                    "lrzstaging",
+                    "hlrs",
+                    "hlrsstaging",
                     "mpcdf",
-                    "denbi",
-                    "tudcloudstaging",
-                    "tudhpcstaging",
-                    "gwdgstaging"
+                    "tudstaging",
+                    "tud",
+                    "denbi"
                   ]
                 }
               },
@@ -537,10 +523,14 @@
                 "dependency": {
                   "system": [
                     "jsccloud",
+                    "lrz",
+                    "lrzstaging",
+                    "hlrs",
+                    "hlrsstaging",
                     "mpcdf",
-                    "denbi",
-                    "tudcloudstaging",
-                    "tudhpcstaging"
+                    "tudstaging",
+                    "tud",
+                    "denbi"
                   ]
                 },            
                 "triggerSuffix": "input-div"
@@ -551,48 +541,23 @@
                 },
                 "triggerSuffix": "input-div",
                 "trigger": {
-                  "system": "homeTriggerFlavorInfo"
+                  "system": "wTriggerFlavorInfo"
                 },
                 "dependency": {
                   "system": [
                     "jsccloud",
+                    "lrz",
+                    "lrzstaging",
+                    "hlrs",
+                    "hlrsstaging",
                     "mpcdf",
-                    "denbi",
-                    "tudcloudstaging",
-                    "tudhpcstaging"
+                    "tudstaging",
+                    "tud",
+                    "denbi"
                   ]
                 }
               }
             },
-          },
-          "storage": {
-            "center": {
-              "storagecb": {
-                "input": {
-                  "type": "storagegrow",
-                  "options": {
-                    "group": "storage",
-                    "default": false,
-                    "collect": false,
-                    "show": true
-                  }
-                },
-                "label": {
-                  "type": "text",
-                  "value": "Add external Storage mount"
-                },
-              },
-              "storage1": {
-                "input": {
-                  "type": "storageentry",
-                  "options": {
-                    "show": true,
-                    "collect": true,
-                    "group": "storage"
-                  }
-                }
-              }
-            }
           },
           "envvariables": {
             "center": {
@@ -625,8 +590,8 @@
                 },
                 "triggerSuffix": "checkboxes-div",
                 "trigger": {
-                  "option": "homeTriggerModules",
-                  "system": "homeTriggerModules"
+                  "option": "wTriggerModules",
+                  "system": "wTriggerModules"
                 },
                 "dependency": {
                   "option": [
@@ -653,8 +618,8 @@
                 },
                 "triggerSuffix": "checkboxes-div",
                 "trigger": {
-                  "option": "homeTriggerModules",
-                  "system": "homeTriggerModules"
+                  "option": "wTriggerModules",
+                  "system": "wTriggerModules"
                 },
                 "dependency": {
                   "option": [
@@ -676,8 +641,8 @@
                 },
                 "triggerSuffix": "checkboxes-div",
                 "trigger": {
-                  "option": "homeTriggerModules",
-                  "system": "homeTriggerModules"
+                  "option": "wTriggerModules",
+                  "system": "wTriggerModules"
                 },
                 "dependency": {
                   "option": [
@@ -699,44 +664,8 @@
                 },
                 "triggerSuffix": "checkboxes-div",
                 "trigger": {
-                  "option": "homeTriggerModules",
-                  "system": "homeTriggerModules"
-                },
-                "dependency": {
-                  "option": [
-                    "lmod"
-                  ]
-                }
-              },
-              "communities": {
-                "input": {
-                  "type": "multiple_checkboxes"
-                },
-                "options": {
-                  "group": "modules",
-                  "setName": "communitySet"
-                },  
-                "label": {
-                  "type": "header",
-                  "value": "Communities"
-                },
-                "triggerSuffix": "checkboxes-div",
-                "trigger": {
-                  "option": "homeTriggerModules",
-                  "system": "homeTriggerModules"
-                },
-                "dependency": {
-                  "option": [
-                    "lmod"
-                  ]
-                }
-              },
-              "selecthelper": {
-                "input": {
-                  "type": "selecthelper"
-                },
-                "options": {
-                  "show": true
+                  "option": "wTriggerModules",
+                  "system": "wTriggerModules"
                 },
                 "dependency": {
                   "option": [
@@ -762,8 +691,8 @@
                   "value": "Nodes"
                 },
                 "trigger": {
-                  "system": "homeTriggerResources",
-                  "partition": "homeTriggerResources"
+                  "system": "wTriggerResources",
+                  "partition": "wTriggerResources"
                 },
                 "dependency": {
                   "system": [
@@ -782,11 +711,11 @@
                 },
                 "label": {
                   "type": "text",
-                  "value": "Runtime (minutes)"
+                  "value": "Runtime"
                 },
                 "trigger": {
-                  "system": "homeTriggerResources",
-                  "partition": "homeTriggerResources"
+                  "system": "wTriggerResources",
+                  "partition": "wTriggerResources"
                 },
                 "dependency": {
                   "system": [
@@ -808,8 +737,8 @@
                   "value": "GPUs"
                 },
                 "trigger": {
-                  "system": "homeTriggerResources",
-                  "partition": "homeTriggerResources"
+                  "system": "wTriggerResources",
+                  "partition": "wTriggerResources"
                 },
                 "dependency": {
                   "system": [
@@ -834,8 +763,8 @@
                   }
                 },
                 "trigger": {
-                  "system": "homeTriggerResources",
-                  "partition": "homeTriggerResources"
+                  "system": "wTriggerResources",
+                  "partition": "wTriggerResources"
                 },
                 "dependency": {
                   "system": [
@@ -861,48 +790,14 @@
                   "type": "buttons",
                   "options": {
                     "buttons": [
-                      "share",
-                      "rtc",
-                      "getlink",
-                      "save",
-                      "reset",
-                      "delete",
-                      "startgreen"
+                      "reset"
                     ],
-                    "share": {
-                      "text": "Share",
-                      "trigger": "homeTriggerButtonShare",
-                      "show": true
-                    },
-                    "rtc": {
-                      "text": "RTC",
-                      "trigger": "homeTriggerButtonRTC",
-                      "show": false
-                    },
-                    "getlink": {
-                      "text": "URL",
-                      "trigger": "homeTriggerButtonGetLink",
-                      "defaultRow": true,
-                      "firstRow": false
-                    },
-                    "startgreen": {
-                      "text": "Start",
-                      "trigger": "homeTriggerButtonStartGreen",
-                      "defaultRow": false,
-                      "alignRight": true
-                    },
-                    "save": {
-                      "trigger": "homeTriggerButtonSave",
-                      "firstRow": false
-                    },
                     "reset": {
                       "firstRow": false,
-                      "trigger": "homeTriggerButtonReset"
-                    },
-                    "delete": {
-                      "firstRow": false,
-                      "trigger": "homeTriggerButtonDelete",
-                      "alignRight": true
+                      "trigger": "wTriggerButtonReset",
+                      "options": {
+                        "fillingOrder": ["option", "system", "account", "project", "partition", "flavor", "privaterepo"]
+                      }
                     }
                   }
                 }
@@ -914,17 +809,14 @@
           "tab": "labconfig",
           "options": {
             "option": "default",
-            "system": "deNBI-Cloud",
-            "flavor": "m1"
+            "system": "deNBI-Cloud"
           }
         },
         "summaryButtons": {
-          "manage": "homeSummaryButtonManage",
           "stop": "homeSummaryButtonStop",
+          "start": "wSummaryButtonStart",
           "open": "homeSummaryButtonOpen",
-          "cancel": "homeSummaryButtonCancel",
-          "del": "homeSummaryButtonDel",
-          "start": "homeSummaryButtonStart"
+          "cancel": "homeSummaryButtonCancel"
         }
       }
     }
