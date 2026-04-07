@@ -505,6 +505,30 @@
                   ]
                 }
               },
+              "gwdgimages": {
+                "input": {
+                  "type": "select",
+                  "options": {
+                    "enabled": true,
+                    "group": "gwdg"
+                  },
+                  "values": {
+                    "textplus": "GWDG Text+ Notebook image",
+                    "gwdgimages": "GWDG Datascience Notebook (Python, R, and Julia)",
+                    "textplus_devel": "GWDG Text+ [Beta] image (only for development)"
+                  }
+                },
+                "label": {
+                  "type": "text",
+                  "value": "Available GWDG Images"
+                },
+                "dependency": {
+                  "system": [
+                    "gwdg",
+                    "gwdgstaging"
+                  ]
+                }
+              },
               "flavor": {
                 "input": {
                   "type": "select",
