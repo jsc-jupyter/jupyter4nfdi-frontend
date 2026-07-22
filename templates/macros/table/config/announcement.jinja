@@ -1,14 +1,13 @@
 {%- import "macros/svgs.jinja" as svg -%}
 
-{%- set show_announcement = false %}
+{%- set show_announcement = true %}
 {%- macro announcement() %}
 <div class="alert bg-info alert-dismissible fade show" style="color: #023d6b;" role="alert">
   <h4 class="alert-heading">       
     {{ svg.announcement_svg | safe }}
     <span class="align-middle">Maintenance of deNBI-Cloud</span>
   </h4>
-  Due to urgent maintenance, <strong>deNBI-Cloud</strong> needs to reboot all servers. The reboot will take place on <i>Friday, 10.07. at 9:00 CEST.</i>
-  Running JupyterLabs on deNBI-Cloud will be stopped during that period. Starting new JupyterLabs on deNBI-Cloud might fail for a few minutes, until all servers are back online.
+  deNBI-Cloud is currently in maintenance. It is expected to come back online during the day. 
   JSC-Cloud will still be available for your JupyterLabs.
   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 </div>
