@@ -1,14 +1,14 @@
 {%- import "macros/svgs.jinja" as svg -%}
 
-{%- set show_announcement = false %}
+{%- set show_announcement = true %}
 {%- macro announcement() %}
 <div class="alert bg-info alert-dismissible fade show" style="color: #023d6b;" role="alert">
   <h4 class="alert-heading">       
     {{ svg.announcement_svg | safe }}
-    <span class="align-middle">Maintenance of deNBI-Cloud</span>
+    <span class="align-middle">deNBI-Cloud Maintenance</span>
   </h4>
-  deNBI-Cloud is currently in maintenance. It is expected to come back online during the day. 
-  JSC-Cloud will still be available for your JupyterLabs.
+  deNBI-Cloud will be undergoing maintenance from 6 October to 9 October.
+  JSC-Cloud will remain available for your JupyterLab sessions.
   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 </div>
 {%- endmacro %}
