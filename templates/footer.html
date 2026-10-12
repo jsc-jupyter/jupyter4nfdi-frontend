@@ -189,10 +189,12 @@ require(["jquery"], function (
                 target="_blank" 
                 class="align-middle" 
                 data-bs-toggle="tooltip"
-                data-bs-placement="top">
+                data-bs-placement="top"
+                data-bs-original-title="Network issues on deNBI-Cloud. We're looking into it."
+                >
                 ${displayName}
             </a>
-	    Network issues on deNBI-Cloud. We're looking into it.
+            ${numberOfUsers(systemLower)}
         </div>`;
     } else {
       ampelHtml = `
