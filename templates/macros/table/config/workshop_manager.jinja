@@ -448,6 +448,33 @@
                   ]
                 }
               },
+              "privaterepopassword": {
+                "input": {
+                  "type": "text",
+                  "options": {
+                    "secret": true,
+                    "group": "custom",
+                    "show": false,
+                    "placeholder": "Enter your password"
+                  }
+                },
+                "label": {
+                  "type": "texticoncheckbox",
+                  "value": "Password",
+                  "icontext": "Password for the private registry",
+                  "options": {
+                    "default": false
+                  }
+                },
+                "trigger": {
+                  "privaterepo": "toggleExternalCB"
+                },
+                "dependency": {
+                  "option": [
+                    "custom"
+                  ]
+                }
+              },
               "localstoragepath": {
                 "input": {
                   "type": "text",
