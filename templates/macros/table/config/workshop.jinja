@@ -99,39 +99,6 @@
                   "type": "hr"
                 }
               },
-              "repo2dockerdirectlink": {
-                "input": {
-                  "type": "text",
-                  "options": {
-                    "collect": false,
-                    "enabled": false,
-                    "copy": true
-                  }
-                },
-                "label": {
-                  "type": "text",
-                  "width": 4,
-                  "value": "Direct Link for this configuration"
-                },
-                "onInput": {
-                  "repourl": "homeTriggerUpdateDirectLinks",
-                  "reporef": "homeTriggerUpdateDirectLinks",
-                  "repopath": "homeTriggerUpdateDirectLinks",
-                  "localstoragepath": "homeTriggerUpdateDirectLinks"
-                },
-                "trigger": {
-                  "repotype": "homeTriggerUpdateDirectLinks",
-                  "system": "homeTriggerUpdateDirectLinks",
-                  "flavor": "homeTriggerUpdateDirectLinks",
-                  "repopathtype": "homeTriggerUpdateDirectLinks",
-                  "localstoragepath": "homeTriggerUpdateDirectLinks"
-                },
-                "dependency": {
-                  "option": [
-                    "repo2docker"
-                  ]
-                }
-              },
               "repotype": {
                 "input": {
                   "type": "select",
@@ -252,7 +219,8 @@
                   "value": "Notebook Type"
                 },
                 "trigger": {
-                  "repopath": "homeTriggerRepoPathType"
+                  "repopath": "homeTriggerRepoPathType",
+                  "init": "homeTriggerRepoPathTypeInit"
                 },
                 "dependency": {
                   "option": [
@@ -362,7 +330,7 @@
                   "type": "text",
                   "options": {
                     "group": "storage",
-                    "enabled": true,
+                    "enabled": false,
                     "placeholder": "/home/jovyan/work",
                     "value": "/home/jovyan/work",
                     "pattern": "^\\/(?:[^\\/\\0]+\\/)*[^\\/\\0]*$"
@@ -372,7 +340,29 @@
                   "type": "textcheckbox",
                   "value": "Mount user data",
                   "options": {
-                    "default": true
+                    "default": false
+                  }
+                },
+                "dependency": {
+                  "option": [
+                    "custom",
+                    "repo2docker"
+                  ]
+                }
+              },
+              "default_url": {
+                "input": {
+                  "type": "text",
+                  "options": {
+                    "enabled": false,
+                    "placeholder": "Path to a notebook file (optional)"
+                  }
+                },
+                "label": {
+                  "type": "textcheckbox",
+                  "value": "Open notebook or path (optional)",
+                  "options": {
+                    "default": false
                   }
                 },
                 "dependency": {
