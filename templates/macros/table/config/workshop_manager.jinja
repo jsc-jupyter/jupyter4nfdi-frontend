@@ -537,6 +537,29 @@
                   ]
                 }
               },
+              "jupyterai": {
+                "input": {
+                  "type": "checkbox",
+                  "options": {
+                    "enabled": true,
+                    "default": false
+                  }
+                },
+                "label": {
+                  "type": "textcheckbox",
+                  "value": "Use JupyterAI Extension"
+                },
+                "dependency": {
+                  "option": [
+                    "custom",
+                    "repo2docker",
+                    "default"
+                  ],
+                  "system": [
+                    "jsccloud"
+                  ]
+                }
+              },
               "envvariables": {
                 "input": {
                   "type": "textgrower",
